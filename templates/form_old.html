@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="./static/styles/main.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"> </script>
+</head>
+<body>
+
+<img id="my_face" src="../uploads/anon.jpg" alt="Your Face Here">
+<img id="returned_face" src="../uploads/anon.jpg" alt="Returned Face Here">
+<img id="left_arrow" src="../uploads/arrow.png" alt="Arrow">
+<img id="right_arrow" src="../uploads/arrow.png" alt="Arrow">
+<div id="percent_box"> 0% </div>
+    <title>Face Match</title>
+    <form action='/_upload_file' method=post enctype=multipart/form-data>
+      <p><input type=file name=file>
+         <input type=submit value=Upload>
+    </form>
+
+ <script type=text/javascript>
+  
+  $(function() {
+    $('#submit_btn').click(function() {
+    	var fileVal=document.getElementById("upload_btn");
+    	var data = {data: fileVal.value}
+    	console.log("DATA IS :", data)
+ 	        $.ajax({
+            url: '/_return_pic?filename=' + fileVal.value,
+            //data: JSON.stringify(data, null, '\t'),
+            //atatype: 'json',
+            //contentType: 'application/json;charset=UTF-8',
+            type: 'GET',
+            success: function(response) {
+                $("#my_face").attr("src", "data:image/png;base64," + response.returned_pic);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+        return false;	        
+    });
+});
+      
+</script>
+</body>
+</html>
