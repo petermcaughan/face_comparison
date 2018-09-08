@@ -18,6 +18,22 @@ body{
 	border-style:solid;
 }
 
+#my_webcam{
+	position:absolute;
+	margin-left:13vw;
+	margin-top:10vw;
+	max-width:20vw;
+	max-height:20vw;
+	border-width: 5px;
+	border-color: black;
+	border-style:solid;
+}
+
+#videoElement{
+	max-width:20vw;
+	max-height:20vw;
+}
+
 #left_arrow{
 	position:absolute;
 	margin-left:32vw;
@@ -69,6 +85,19 @@ body{
     height: 3.8vw;
     width: 9vw;
 }
+
+#snap{
+	position:absolute;
+	margin-left:18.5vw;
+	margin-top:28.5vw; 
+	background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    font-size: 16px;
+    height: 3.8vw;
+    width: 9vw;
+}
+
 
 #upload_btn{
 	position:absolute;

@@ -8,8 +8,8 @@
 <h1 id="header"> Welcome to the Face-Making Game! </h1>
 <h2 id="desc"> Upload a picture of the face most like the example picture and get a score! </h2>
 
-<img id="my_face" src="../uploads/anon.jpg" alt="Your Face Here">
-<!--<div id="my_webcam"> <video id="videoElement" autoplay="true"></video></div>-->
+<!--<img id="my_face" src="../uploads/anon.jpg" alt="Your Face Here">-->
+<div id="my_webcam"> <video id="videoElement" autoplay="true"></video></div>
 <img id="returned_face" src="../uploads/anon.jpg" alt="Returned Face Here">
 <img id="left_arrow" src="../uploads/arrow.png" alt="Arrow">
 <img id="right_arrow" src="../uploads/arrow.png" alt="Arrow">
@@ -17,13 +17,12 @@
     <title>Face Match</title>
     <form id = "form" action='/_upload_file' method=post enctype=multipart/form-data>
     <input type=file id="upload_btn" name=file>-->
-      <input type=submit id="submit_btn" value=Upload>
+      <!--<input type=submit id="submit_btn" value=Upload>-->
     </form>
-   <!-- <button id='snap'>Take Picture!</button> -->
+   <button id='snap'>Take Picture!</button>
 
-<button id="reset_button" onclick="opponentReset()">Reset Picture</button>
+<button id="reset_button" onclick="takeSnapshot()">Reset Picture</button>
  <script type=text/javascript>
-/*
   opponentReset();
   var video = document.querySelector("#videoElement");
  
@@ -48,7 +47,7 @@
      *  generates a still frame image from the stream in the <video>
      *  appends the image to the <body>
      */
-     /*
+     
     function takeSnapshot() {
       var img = document.querySelector('img') || document.createElement('img');
       var context;
@@ -66,7 +65,7 @@
       $.ajax({
         url: '/_upload_file',
         type: 'POST',
-        data: CURR_PIC,
+        data: CURR_PIC.encode(),
         success: function (data) {
         	console.log(data)
         },
@@ -74,6 +73,7 @@
         contentType: false,
         processData: false
     });
+      /*
     	var fileVal = CURR_PIC
     	var data = {data: CURR_PIC}
  	        $.ajax({
@@ -91,6 +91,7 @@
                 console.log(error);
             }
         });
+        */
         return false;	  
       document.body.appendChild(img);
     }
@@ -112,7 +113,7 @@
         });
     }
   })();
-  */
+  
   function opponentReset(){
  	        $.ajax({
             url: '/_reset_image',
@@ -133,11 +134,11 @@
 
   $("#form").submit(function(e) {
     e.preventDefault();    
-    var formData = new FormData(this);
+    //var formData = new FormData(this);
     $.ajax({
         url: '/_upload_file',
         type: 'POST',
-        data: formData,
+        data: CURR_PIC,
         success: function (data) {
         	console.log(data)
         },
@@ -162,10 +163,7 @@
                 console.log(error);
             }
         });
-
-        return false;	
-        
-
+        return false;	  
 	});
  
 /*

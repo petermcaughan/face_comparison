@@ -19,24 +19,15 @@ def allowed_file(filename):
 
 @app.route('/', methods=['GET','POST'])
 def index():
-    return render_template('index.html')
+    return render_template('webcam_test.html')
 
 @app.route('/_upload_file', methods=['POST'])
 def upload_file():
     print(request.data)
-    if request.method == 'POST':
-        # check if the post request has the file part
-        if 'file' not in request.files:
-            return redirect(request.url)
-        file = request.files['file']
-        if file.filename == '':
-            flash('No selected file')
-            return redirect(request.url)
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            CURR_IMAGE = './uploads/' + filename
-            return jsonify({'success':True})
+    fh = open("imageToSave.png", "wb")
+    fh.write(request.data.decode('base64'))
+    fh.close()
+    return jsonify({'success':True})
 
 @app.route('/_return_pic', methods=['GET'])
 def return_pic():
