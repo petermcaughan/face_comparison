@@ -5,6 +5,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"> </script>
 </head>
 <body>
+<h1 id="header"> Welcome to the Face-Making Game! </h1>
+<h2 id="desc"> Upload a picture of the face most like the example picture and get a score! </h2>
 
 <img id="my_face" src="../uploads/anon.jpg" alt="Your Face Here">
 <img id="returned_face" src="../uploads/anon.jpg" alt="Returned Face Here">
@@ -13,11 +15,30 @@
 <div id="percent_box"> 0% </div>
     <title>Face Match</title>
     <form id = "form" action='/_upload_file' method=post enctype=multipart/form-data>
-      <input class='lined-thin' type=file id="upload_btn" name=file>
+      <input type=file id="upload_btn" name=file>
       <input type=submit id="submit_btn" value=Upload>
     </form>
 
+<button id="reset_button" onclick="opponentReset()">Reset Picture</button>
  <script type=text/javascript>
+
+  opponentReset();
+  function opponentReset(){
+ 	        $.ajax({
+            url: '/_reset_image',
+            //data: JSON.stringify(data, null, '\t'),
+            //atatype: 'json',
+            //contentType: 'application/json;charset=UTF-8',
+            type: 'GET',
+            success: function(response) {
+                $("#returned_face").attr("src", "data:image/png;base64," + response.returned_pic);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+ 	    return false;
+  }
 
   $("#form").submit(function(e) {
     e.preventDefault();    
@@ -35,7 +56,6 @@
     });
     var fileVal=document.getElementById("upload_btn");
     	var data = {data: fileVal.value}
-    	console.log("DATA IS :", data)
  	        $.ajax({
             url: '/_return_pic?filename=' + fileVal.value,
             //data: JSON.stringify(data, null, '\t'),
@@ -43,7 +63,9 @@
             //contentType: 'application/json;charset=UTF-8',
             type: 'GET',
             success: function(response) {
+            	console.log(response)
                 $("#my_face").attr("src", "data:image/png;base64," + response.returned_pic);
+                $("#percent_box").text(response.percent + '%');
             },
             error: function(error) {
                 console.log(error);

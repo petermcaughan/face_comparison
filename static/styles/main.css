@@ -60,12 +60,45 @@ body{
 
 #submit_btn{
 	position:absolute;
-	margin-left:43vw;
-	margin-top:40vw; 
+	margin-left:18.5vw;
+	margin-top:28.5vw; 
+	background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    font-size: 16px;
+    height: 3.8vw;
+    width: 9vw;
 }
 
 #upload_btn{
 	position:absolute;
-	margin-left:38vw;
-	margin-top:35vw; 
+	margin-left:16vw;
+	margin-top:7vw;
 }
+
+#reset_button{
+	background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    position:absolute;
+    margin-left : 67vw;
+    margin-top:28vw;
+}
+
+#header{
+	text-align:center;
+	font-size:4vw;
+}
+
+#desc{
+	text-align:center;
+	font-size:3vw;
+	margin-bottom:0vw;
+}
+
