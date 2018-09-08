@@ -15,13 +15,16 @@
 <img id="right_arrow" src="../uploads/arrow.png" alt="Arrow">
 <div id="percent_box"> 0% </div>
     <title>Face Match</title>
+    <!--
     <form id = "form" action='/_upload_file' method=post enctype=multipart/form-data>
-    <input type=file id="upload_btn" name=file>-->
-      <!--<input type=submit id="submit_btn" value=Upload>-->
+    <input type=file id="upload_btn" name=file>
+    <input type=submit id="submit_btn" value=Upload>
     </form>
-   <button id='snap'>Take Picture!</button>
+    -->
+   <button id='snap' onclick="takeSnapshot()">Take Picture!</button>
 
-<button id="reset_button" onclick="takeSnapshot()">Reset Picture</button>
+<button id="reset_button" onclick="opponentReset()">Reset Picture</button>
+
  <script type=text/javascript>
   opponentReset();
   var video = document.querySelector("#videoElement");
@@ -36,7 +39,7 @@
 	  });
 	}
 
-  (function() {
+  
     'use strict';
     var video = document.querySelector('video')
       , canvas;
@@ -65,7 +68,7 @@
       $.ajax({
         url: '/_upload_file',
         type: 'POST',
-        data: CURR_PIC.encode(),
+        data: CURR_PIC,
         success: function (data) {
         	console.log(data)
         },
@@ -112,7 +115,6 @@
           document.body.textContent = 'Could not access the camera. Error: ' + error.name;
         });
     }
-  })();
   
   function opponentReset(){
  	        $.ajax({

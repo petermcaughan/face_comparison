@@ -1,7 +1,9 @@
+#!/usr/bin/python3
 import os, random
 from flask import Flask, flash, request, redirect, url_for, render_template, jsonify
 from flask import send_from_directory
 from werkzeug.utils import secure_filename 
+import testbench
 import base64 
 
 UPLOAD_FOLDER = './uploads'
@@ -19,11 +21,12 @@ def allowed_file(filename):
 
 @app.route('/', methods=['GET','POST'])
 def index():
+    #unit_testbench()
     return render_template('index.html')
 
 @app.route('/_upload_file', methods=['POST'])
 def upload_file():
-    print(request.data)
+    print(request.files)
     if request.method == 'POST':
         # check if the post request has the file part
         if 'file' not in request.files:
@@ -53,15 +56,7 @@ def return_pic():
         #return render_template('form.html')
     else:
         return "nothing"
-    '''
-    <!doctype html>
-    <title>Upload new File</title>
-    <h1>Upload new File</h1>
-    <form method=post enctype=multipart/form-data>
-      <input type=file name=file>
-      <input type=submit value=Upload>
-    </form>
-    '''
+    
 
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):    

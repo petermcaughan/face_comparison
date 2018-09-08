@@ -24,8 +24,10 @@ def index():
 @app.route('/_upload_file', methods=['POST'])
 def upload_file():
     print(request.data)
+    encoding = request.data.decode('base64')
+    print(encoding)
     fh = open("imageToSave.png", "wb")
-    fh.write(request.data.decode('base64'))
+    fh.write(encoding.decode('base64'))
     fh.close()
     return jsonify({'success':True})
 
